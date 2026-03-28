@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JungleClear.gg UI Component Showcase v3.0</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"tertiary-dim": "#00d1ec", "on-secondary": "#4c5260", "on-secondary-container": "#cbd0e1", "tertiary-container": "#00e0fd", tertiary: "#7de9ff", "on-secondary-fixed-variant": "#565b6a", "on-secondary-fixed": "#393f4d", "surface-container-highest": "#202633", "surface-container-low": "#0f131d", error: "#ff7351", "on-primary-container": "#002c0f", "on-primary-fixed-variant": "#00682c", "on-surface": "#ebedfb", "tertiary-fixed": "#00e0fd", "surface-variant": "#202633", background: "#0a0e17", "primary-container": "#0da573", "on-primary": "#005d27", "primary-fixed": "#10b981", "on-tertiary-fixed-variant": "#005561", "on-tertiary-container": "#004b56", primary: "#10b981", "on-surface-variant": "#a7abb7", "surface-dim": "#0a0e17", "on-tertiary": "#005561", "inverse-surface": "#faf9ff", outline: "#727581", "inverse-primary": "#006e2f", "on-tertiary-fixed": "#00363e", "surface-tint": "#10b981", "tertiary-fixed-dim": "#00d1ec", "secondary-dim": "#cfd4e5", "error-dim": "#d53d18", surface: "#0a0e17", "on-error": "#450900", "on-background": "#ebedfb", "outline-variant": "#444852", "primary-fixed-dim": "#10b981", "on-error-container": "#ffd2c8", "secondary-fixed-dim": "#cfd4e5", "surface-bright": "#262c3a", "surface-container-high": "#1a1f2c", "secondary-fixed": "#dde2f3", "surface-container": "#141a26", secondary: "#dde2f3", "inverse-on-surface": "#515560", "primary-dim": "#10b981", "secondary-container": "#414754", "on-primary-fixed": "#00481c", "error-container": "#b92902", "surface-container-lowest": "#000000"}, fontFamily: {headline: ["Space Grotesk"], body: ["Manrope"], label: ["Space Grotesk"], mono: ["JetBrains Mono", "monospace"], display: "Space Grotesk"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .jungle-gradient {
+            background: linear-gradient(135deg, #10B981 0%, #0DA573 100%);
+        }
+        .bg-card {
+            background-color: #141A26;
+        }
+        .glass-panel {
+            background: rgba(20, 26, 38, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .pulse-shadow:hover {
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
+        }
+        .tier-badge-challenger {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0E17]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(16,185,129,0.06)] border-b border-white/5">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-[#10B981] uppercase italic font-headline">
+                JungleClear.gg
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline tracking-tight">
+<a class="text-white/70 hover:text-white transition-colors" href="#">Champions</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">Leaderboards</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">Patch Notes</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">Guides</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-white/70 hover:text-white px-4 py-2 transition-all active:scale-95">Login</button>
+<button class="jungle-gradient text-on-primary-container font-bold px-6 py-2 rounded-lg transition-all active:scale-95 shadow-lg shadow-primary/10">Sign Up</button>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-6 max-w-7xl mx-auto space-y-24">
+<!-- Hero Branding -->
+<header class="text-center space-y-4">
+<h1 class="text-6xl md:text-8xl font-headline font-bold tracking-tighter italic uppercase text-primary">UI KIT v3.0</h1>
+<p class="text-on-surface-variant max-w-2xl mx-auto text-lg">Tactical Pulse Evolution. The final precision interface for the competitive jungle ecosystem.</p>
+</header>
+<!-- Typography & Colors -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[2px] bg-primary"></span>
+<h2 class="text-3xl font-headline font-bold text-on-surface uppercase tracking-tight">01. Typography &amp; Colors</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-card rounded-xl p-8 space-y-8 border border-white/5">
+<div class="space-y-4">
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold">Typography Stack</p>
+<div class="space-y-1">
+<h1 class="text-5xl font-headline font-bold text-on-surface italic uppercase">Display Headline</h1>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Space Grotesk Bold Italic</p>
+</div>
+<div class="space-y-6 pt-4">
+<div>
+<h3 class="text-2xl font-bold text-on-surface">리 신 <span class="text-xs text-on-surface-variant font-medium ml-2 uppercase tracking-wide">Lee Sin</span></h3>
+<p class="text-[10px] text-primary uppercase tracking-widest mt-1">Champion Hierarchy: KR Bold / EN Small Secondary</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card rounded-xl p-8 grid grid-cols-2 gap-4 border border-white/5">
+<div class="space-y-2">
+<div class="h-24 w-full bg-background rounded-lg border border-white/5"></div>
+<p class="text-sm font-mono text-on-surface">#0A0E17</p>
+<p class="text-xs text-on-surface-variant">Bg-Main (Abyss)</p>
+</div>
+<div class="space-y-2">
+<div class="h-24 w-full bg-card rounded-lg border border-white/5"></div>
+<p class="text-sm font-mono text-on-surface">#141A26</p>
+<p class="text-xs text-on-surface-variant">Bg-Card (Core)</p>
+</div>
+<div class="space-y-2">
+<div class="h-24 w-full bg-primary rounded-lg shadow-[0_0_20px_rgba(16,185,129,0.2)]"></div>
+<p class="text-sm font-mono text-on-surface">#10B981</p>
+<p class="text-xs text-on-surface-variant">Primary (Pulse)</p>
+</div>
+<div class="space-y-2">
+<div class="h-24 w-full bg-on-surface-variant rounded-lg"></div>
+<p class="text-sm font-mono text-on-surface">#A7ABB7</p>
+<p class="text-xs text-on-surface-variant">Text-Secondary</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Buttons & Badges -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[2px] bg-primary"></span>
+<h2 class="text-3xl font-headline font-bold text-on-surface uppercase tracking-tight">02. Buttons &amp; Badges</h2>
+</div>
+<div class="bg-card rounded-xl p-10 border border-white/5">
+<div class="flex flex-wrap gap-8 items-center">
+<div class="space-y-3">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Status Badges</p>
+<div class="flex gap-3">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary/10 text-primary border border-primary/20 uppercase tracking-tighter italic">Full Clear</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/5 text-on-surface-variant border border-white/10 uppercase tracking-tighter italic">No Video</span>
+</div>
+</div>
+<div class="space-y-3">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Tier Badges</p>
+<div class="flex gap-4 items-center">
+<span class="tier-badge-challenger text-xs">CHALLENGER</span>
+<span class="text-xs font-bold text-[#A592FF]">MASTER</span>
+<span class="text-xs font-bold text-[#4EEDFF]">DIAMOND</span>
+</div>
+</div>
+<div class="space-y-3">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Interactive</p>
+<button class="jungle-gradient text-on-primary-container font-bold px-6 py-2 rounded-lg text-sm transition-all active:scale-95">Primary Action</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Inputs & Search -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[2px] bg-primary"></span>
+<h2 class="text-3xl font-headline font-bold text-on-surface uppercase tracking-tight">03. Tactical Search Layer</h2>
+</div>
+<div class="bg-card rounded-xl p-10 border border-white/5">
+<div class="max-w-2xl mx-auto space-y-4">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant mb-4 px-2">Refined Autocomplete Layer</p>
+<div class="relative">
+<span class="absolute left-6 top-6 material-symbols-outlined text-primary">search</span>
+<input class="w-full bg-background/50 border border-white/10 focus:border-primary/50 focus:ring-0 pl-16 pr-8 py-5 rounded-t-xl text-lg font-headline transition-all placeholder:text-white/20" placeholder="챔피언 검색..." type="text" value="ㄹ"/>
+<div class="bg-[#1A1F2C] border-x border-b border-white/10 rounded-b-xl overflow-hidden shadow-2xl">
+<div class="px-4 py-2 bg-white/5 text-[10px] uppercase tracking-widest text-primary font-bold">Videos Available</div>
+<div class="p-2 space-y-1">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded overflow-hidden border border-white/10">
+<img alt="Lee Sin" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDB3pbFM6c6BVVKb9qQxNt4kKOIG4ZUBGJTfl8IY4lvMsE9S0Ux0KVqHhnHZ1OCAgXIokK3q0MIGpOwZQrngQTqBbLL3PZB9FhN_AM-gBeb87IBzmQtlEZ6nZQfbDHOst111I6j4I4bjquvxS4KG6qsCaVfjUFP0rPM1yg7NdhgVVlCtE2QhhGiajY57UX5UZP7DFXFxLaSWVVzEykR7In8gOxI5GAPRMzsVupMCphwNsy7E-EEcsbP-Ns-bRQGB2XC87qhWlzTa8"/>
+</div>
+<div>
+<span class="font-bold text-on-surface">리 신</span>
+<span class="text-xs text-on-surface-variant ml-2 uppercase tracking-wide">Lee Sin</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-mono text-on-surface-variant">02:58</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+</div>
+</div>
+<div class="px-4 py-2 bg-white/5 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">No Recent Videos</div>
+<div class="p-2">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors opacity-60">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded overflow-hidden bg-surface-container-low border border-white/5"></div>
+<div>
+<span class="font-bold text-on-surface">렉사이</span>
+<span class="text-xs text-on-surface-variant ml-2 uppercase tracking-wide">Rek'Sai</span>
+</div>
+</div>
+<span class="text-[10px] text-on-surface-variant italic">UPDATING</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Card & Data Display -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[2px] bg-primary"></span>
+<h2 class="text-3xl font-headline font-bold text-on-surface uppercase tracking-tight">04. Champion Data Display</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Data Display (Stats Card) -->
+<div class="lg:col-span-1 bg-card rounded-xl p-6 border border-white/5 space-y-6">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Meta Statistics (Monospace Focus)</p>
+<div class="grid grid-cols-3 gap-4">
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Win Rate</p>
+<p class="text-xl font-mono font-bold text-primary">52.4%</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Pick Rate</p>
+<p class="text-xl font-mono font-bold text-white">14.2%</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Ban Rate</p>
+<p class="text-xl font-mono font-bold text-white">8.7%</p>
+</div>
+</div>
+</div>
+<!-- Champion Cards (5-Column Context) -->
+<div class="lg:col-span-2 space-y-4">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">5-Column Grid Optimized Card</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+<!-- Card Example -->
+<div class="group relative bg-card rounded-xl p-4 transition-all hover:-translate-y-1 hover:bg-surface-container-high pulse-shadow cursor-pointer border border-white/5">
+<div class="flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-primary/20">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDB3pbFM6c6BVVKb9qQxNt4kKOIG4ZUBGJTfl8IY4lvMsE9S0Ux0KVqHhnHZ1OCAgXIokK3q0MIGpOwZQrngQTqBbLL3PZB9FhN_AM-gBeb87IBzmQtlEZ6nZQfbDHOst111I6j4I4bjquvxS4KG6qsCaVfjUFP0rPM1yg7NdhgVVlCtE2QhhGiajY57UX5UZP7DFXFxLaSWVVzEykR7In8gOxI5GAPRMzsVupMCphwNsy7E-EEcsbP-Ns-bRQGB2XC87qhWlzTa8"/>
+</div>
+<div class="bg-primary/10 text-primary p-1.5 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="space-y-0.5">
+<h3 class="font-bold text-lg text-on-surface leading-tight">리 신</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Lee Sin</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-on-surface-variant font-bold tracking-widest uppercase">Win Rate</span>
+<span class="text-sm font-mono text-white font-bold">52.4%</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-white/5 mt-1">
+<span class="text-[10px] text-primary font-bold tracking-tighter italic">FULL CLEAR</span>
+<span class="text-lg font-mono font-bold text-primary">02:58</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Clear Leaderboard -->
+<div class="space-y-6 pt-12">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant px-2">Refined Ranking Bar (High-Density)</p>
+<div class="bg-card rounded-xl overflow-hidden border border-white/5">
+<table class="w-full text-left">
+<thead class="bg-black/20 text-[10px] uppercase tracking-widest text-on-surface-variant">
+<tr>
+<th class="px-6 py-4 font-semibold w-16 text-center">Rank</th>
+<th class="px-6 py-4 font-semibold">Champion</th>
+<th class="px-6 py-4 font-semibold">Clear Time</th>
+<th class="px-6 py-4 font-semibold">Version</th>
+<th class="px-6 py-4 font-semibold">Summoner</th>
+<th class="px-6 py-4 font-semibold">Tier</th>
+<th class="px-6 py-4 font-semibold text-right">Playback</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="bg-primary/5 group">
+<td class="px-6 py-4 text-center"><span class="text-primary font-bold">01</span></td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded bg-surface-variant overflow-hidden shrink-0 border border-primary/20">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-41Seyv5COsw8SoUQkw6xIZoonlyXWySiW6e-iA09hiIMsm7YlJ1bOsLuLFrI1C6cnZWMvkj5arnRiywezFhC1SS-7hULou57PGwCLsugK47xNWz-e24jrBe_EgJTVmuEDhPhjaoOPtO3u4n_FugN9iK5Nj4l8xril2mgoFLQ4607wWkKLLEtIg9dORuL-rPpZISGMgr8Dx-iV9yoMsAGBTL2URsrHDsLJiLaaU85aGyRXm1sB4HdYWCJd48Ov0a7McjpHHUq4xw"/>
+</div>
+<div class="flex flex-col leading-tight">
+<span class="font-bold text-on-surface">렝가</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-wider">Rengar</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-primary font-bold">02:58</td>
+<td class="px-6 py-4 text-[10px] font-mono text-on-surface-variant">v14.5</td>
+<td class="px-6 py-4 text-sm font-bold text-on-surface">Scrubnoob</td>
+<td class="px-6 py-4"><span class="tier-badge-challenger text-[10px]">CHALLENGER</span></td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:scale-110 transition-transform active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Specialized Elements -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[2px] bg-primary"></span>
+<h2 class="text-3xl font-headline font-bold text-on-surface uppercase tracking-tight">05. Specialized Modules</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- 16:9 Video Player -->
+<div class="space-y-4">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Atmospheric 16:9 Player</p>
+<div class="aspect-video bg-card rounded-xl relative overflow-hidden group cursor-pointer border border-white/5">
+<img class="w-full h-full object-cover opacity-30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMwv_GRNdF8qmqWugUUdpZmteQj35GhcPS6o34rk6ZvyieXMBVvvwejsO6Wi2Biy1iBf9RbaIX4DwrFXr6AycgQLzNZf5e8rWE39FBItFw8fhtDFekdFUT8vGXWi8PnUBgweBDcVDJAiIlmGBRge931oHSZ0SbGbwqNjlOnnvnMGgrgBcrfI1otE8yMj2LAZQNkMr4TKUAX65bI8VfgNzcLVUcoG17Bi0kYWxTPhwHMoJASuq_LYsb7U5SVNetzpWLkDZzydf6edA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-20 h-20 rounded-full jungle-gradient flex items-center justify-center group-hover:scale-110 transition-transform shadow-[0_0_40px_rgba(16,185,129,0.25)]">
+<span class="material-symbols-outlined text-4xl text-on-primary-container" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<div class="space-y-1">
+<p class="text-primary text-xs font-bold uppercase tracking-widest">Live Optimization</p>
+<h4 class="text-xl font-headline font-bold italic uppercase">Patch 14.5 Full Clear</h4>
+</div>
+<span class="font-mono text-white/50 text-sm">10:42</span>
+</div>
+</div>
+</div>
+<!-- Jungle Path Timeline -->
+<div class="space-y-4">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Path Analysis Timeline</p>
+<div class="bg-card rounded-xl p-10 h-full flex flex-col justify-center border border-white/5">
+<div class="flex items-center justify-between relative max-w-md mx-auto w-full">
+<div class="absolute top-1/2 left-0 right-0 h-0.5 bg-white/5 -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 z-0 w-2/3"></div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-14 h-14 rounded-full bg-card border-2 border-primary flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+<span class="material-symbols-outlined text-primary">egg</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Red</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-14 h-14 rounded-full bg-card border-2 border-primary flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+<span class="material-symbols-outlined text-primary">pest_control</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Krugs</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-14 h-14 rounded-full bg-card border-2 border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">raven</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Raptors</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0E17] w-full py-12 border-t border-white/5">
+<div class="flex flex-col items-center gap-6 max-w-7xl mx-auto px-6">
+<div class="text-[#10B981] font-black text-xl font-headline italic uppercase tracking-tighter">
+                JungleClear.gg
+            </div>
+<div class="flex flex-wrap justify-center gap-8 font-headline text-xs uppercase tracking-widest text-white/40">
+<a class="hover:text-[#10B981] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#10B981] transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-[#10B981] transition-colors" href="#">API Docs</a>
+<a class="hover:text-[#10B981] transition-colors" href="#">Contact</a>
+</div>
+<p class="font-body text-[10px] uppercase tracking-[0.2em] text-white/20 text-center">
+                © 2024 JungleClear.gg. Tactical Pulse v3.0 Design System.
+            </p>
+</div>
+</footer>
+</body></html>

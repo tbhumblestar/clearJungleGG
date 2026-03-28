@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"outline-variant": "#444852", "tertiary-fixed-dim": "#00d1ec", "tertiary-dim": "#00d1ec", "surface-tint": "#68fc8d", error: "#ff7351", "on-primary-container": "#002c0f", secondary: "#dde2f3", "on-surface-variant": "#a7abb7", "secondary-fixed": "#dde2f3", "secondary-container": "#414754", "surface-container-lowest": "#000000", "inverse-surface": "#faf9ff", "on-tertiary-fixed": "#00363e", "tertiary-container": "#00e0fd", "on-primary-fixed-variant": "#00682c", "on-error": "#450900", tertiary: "#7de9ff", surface: "#0a0e17", "surface-variant": "#202633", "primary-dim": "#58ed80", "inverse-on-surface": "#515560", "surface-dim": "#0a0e17", "primary-fixed-dim": "#58ed80", "error-container": "#b92902", primary: "#68fc8d", "primary-fixed": "#68fc8d", "tertiary-fixed": "#00e0fd", "surface-container-low": "#0f131d", "inverse-primary": "#006e2f", "surface-container-high": "#1a1f2c", "on-tertiary": "#005561", "on-secondary": "#4c5260", "surface-bright": "#262c3a", "primary-container": "#0cbc56", "on-primary-fixed": "#00481c", "on-secondary-container": "#cbd0e1", "surface-container-highest": "#202633", "error-dim": "#d53d18", "on-surface": "#ebedfb", "on-tertiary-container": "#004b56", outline: "#727581", "on-error-container": "#ffd2c8", "on-secondary-fixed-variant": "#565b6a", "on-tertiary-fixed-variant": "#005561", "on-secondary-fixed": "#393f4d", "surface-container": "#141a26", "secondary-fixed-dim": "#cfd4e5", background: "#0a0e17", "on-background": "#ebedfb", "secondary-dim": "#cfd4e5", "on-primary": "#005d27"}, fontFamily: {headline: ["Space Grotesk"], body: ["Manrope"], label: ["Space Grotesk"], display: "Space Grotesk"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}}}};</script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #0a0e17;
+        color: #ebedfb;
+        font-family: 'Manrope', sans-serif;
+      }
+      .glass-card {
+        background: rgba(26, 31, 44, 0.8);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0E17]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(104,252,141,0.06)] h-16">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-bold tracking-tighter text-[#68FC8D] uppercase italic font-['Space_Grotesk']" href="#">JungleClear.gg</a>
+<div class="hidden md:flex gap-8 font-['Space_Grotesk'] tracking-tight">
+<a class="text-white/70 hover:text-white transition-colors" href="#">Champions</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">Leaderboards</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">Patch Notes</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">Guides</a>
+</div>
+</div>
+<div class="flex items-center gap-4 font-['Space_Grotesk']">
+<button class="px-5 py-2 text-white/70 hover:text-white transition-colors text-sm font-medium active:scale-95 duration-200">Login</button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:shadow-[0_0_15px_rgba(104,252,141,0.4)] transition-all active:scale-95 duration-200">Sign Up</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-[1440px] mx-auto min-h-screen">
+<!-- Hero Search Section -->
+<section class="flex flex-col items-center mb-24 text-center">
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter mb-8 uppercase italic text-on-surface">
+                Master the <span class="text-primary">Jungle</span>
+</h1>
+<div class="w-full max-w-2xl relative group">
+<div class="absolute inset-0 bg-primary/10 blur-2xl rounded-xl opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+<div class="relative flex items-center bg-surface-container-low rounded-xl p-1 shadow-2xl border border-white/5">
+<span class="material-symbols-outlined ml-6 text-primary">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-lg py-5 px-6 font-body placeholder:text-on-surface-variant/40" placeholder="챔피언 이름이나 초성을 검색하세요 (예: ㄴㄷㄹ)" type="text"/>
+<div class="hidden md:flex items-center gap-2 pr-4">
+<kbd class="bg-surface-container-high px-2 py-1 rounded text-xs font-label text-on-surface-variant">⌘</kbd>
+<kbd class="bg-surface-container-high px-2 py-1 rounded text-xs font-label text-on-surface-variant">K</kbd>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-3 flex-wrap w-full max-w-2xl justify-start px-2">
+<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant/60 py-1">Trending:</span>
+<a class="text-xs font-label text-primary hover:bg-primary/10 border border-white/10 rounded-full px-3 py-1 transition-all" href="#">리신</a>
+<a class="text-xs font-label text-primary hover:bg-primary/10 border border-white/10 rounded-full px-3 py-1 transition-all" href="#">니달리</a>
+<a class="text-xs font-label text-primary hover:bg-primary/10 border border-white/10 rounded-full px-3 py-1 transition-all" href="#">그레이브즈</a>
+</div>
+</section>
+<!-- Champion Grid -->
+<section>
+<div class="flex items-end justify-between mb-8 border-b border-white/5 pb-4">
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">인기 챔피언 영상</h2>
+<div class="flex gap-4">
+<button class="text-sm font-label text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        All Tiers
+                    </button>
+<button class="text-sm font-label text-on-surface-variant hover:text-white transition-colors">Clear Speed</button>
+<button class="text-sm font-label text-on-surface-variant hover:text-white transition-colors">Win Rate</button>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+<!-- Champion Card Template (Repeated for variety) -->
+<!-- Card: Lee Sin -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="리신" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIEyeDrbXThO9zmVQSz2gXdQJpRjR6fAXEIJ4icipeQlI3urwWeN-nZ3l-xxxEODiA1O8L0YGzRBujALlIY5M3ds-tL1iAEakyGl9CmQvJv0jxDmCdbmXX9Mfkm9ZrXeIOBNmpJ8l9orP1cnV5T50UBUd4nooPOO3qhAqMY-8ebowkDTPbzrKr_l1qcFX1VBYuFPVd8tWQSCif5b0oahNI-6v36H0ADneW2Jj0SKNb0K_F1sFO6iSnBeUHHjDw_lnAl26PsfiTHj4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">리신</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">52.4%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:05</span>
+</div>
+</div>
+</div>
+<!-- Card: Nidalee -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="니달리" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-f_F6m2JV32iwLSV93O3SvhIVaLWzNql8w6HoPnaWr-oyrW45RfM41gpGNtzXS4XWd5D7pjyjvy6otwFl1cLT-7-2AIPpv1_F3fNm097eKwd-ZYFQ1wpo9FbD0_U9aYm1rc3yw0NcDS9zHdgWkUuy5QrFdKvxzEYBleXQvrKcfcsSWlvEwQIXGO1idcw2iVYJqd9_pRUoxxQoxcu49t-YVXV0aNcLqF5kURHWwrH5o7W3d84QZxKy-2gObRczsOW5MlriYDnrCjw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">니달리</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">49.8%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">02:58</span>
+</div>
+</div>
+</div>
+<!-- Card: Graves -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="그레이브즈" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSCI6_j8hckDvEAqiDMDp9DGVPSpaRnxl7GGXgMIAjmn_j56uau5QYiZWZTRXymC3jAFTiYfu92IvSUJ28s0X8twl7a7-_rjoRwInOa8o4_ftkeK1klq28FlwJSk2qBd-6Bxyk79bYGH2ZeHWZkwaxMco76FqXWVvQ5O_ZB2V5hyHKrNo1Y_1-vFBug9D-r26wg2vJiGFVv96CKgfArrtVZFcxP48Afl8ISKTY579iSXRWxHEor2dKu9z8G0l63oKYJlIXW_ayGnw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">그레이브즈</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">50.2%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:12</span>
+</div>
+</div>
+</div>
+<!-- Card: Kha'Zix -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="카직스" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl7A_uFCbRR2aF8p0hiM1ofHEs91I0-0A9qeyogS3hT73hUY_OepFajXn91UT1YnVWFFNwwWtqiBEVo3Rv-4wTWX9piB4N4BDYJBhnv-gJftks0ER96typpZoxGs0ye-IdRYhpGT1psPvYr-UkqbqkPZgDWuIUwynDiB5R_A5ZTF1FwopEBfwTEh42N6Obp0NjSTrIF0lsuIqe8Vr_JSRls8xKt42V5f1iKFH2fSP-CTfSlEtVppHmX8TCIjO8vOVP4zav36fUJ2Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">카직스</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">51.1%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:04</span>
+</div>
+</div>
+</div>
+<!-- Card: Rengar -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="렝가" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1qOcsM4TJ3GGI2D4ZFjIjnBwBMe-sjmyqNLRt5Yl7TyXGToKJFlOwdg3HFr0b_IOcDis9fxxH8BxjcaK9Zm_PWQOiNyeAqCqt1r1az_fuVbF-SbTBPSn_Jchust0yKI6lxuowBpUV448z3-aL__lqndTBr9EFMIzE3XlxLxmOB2zBskKcnZBDtTIPCMMdcwmJ49MAQwz9fOBoS7Slt5VzCxV-VojLUP5WNTt_ngH2oMFr05AEq3i-eoJo68miCKzPkTDUHD6_WMs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">렝가</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">52.9%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:00</span>
+</div>
+</div>
+</div>
+<!-- Card: Bel'Veth -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="벨베스" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS9rPGvVfXpvtqeEcCXhNxU5b5xUZpBXWnbjqOZH06R7o18H0VZNm4w5urxyWn1j5Q6Y6LcCzB6iuSPuOfhrnifP7xRjZDSGNpH9Kq00jMjQubFm4javIAKMC-kUfkH6kKd510nCG4OrhnY-Sj255foH0hr1VruqeKtk6Vjdlf3GABlehXgMSKifNoeDuzNaVq4mX14vdU8t1vg6FnxriSJy9rh6GAhhxPq5XNhtNOJy6JINmomM8IOt2meSSGsGC819oq3UDtJpY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">벨베스</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">53.2%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">02:52</span>
+</div>
+</div>
+</div>
+<!-- Card: Briar -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="브라이어" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqDYr-zVOlWj_Kqfi9WlqgXjAe0xVqAxHf1cIXCwMoC3zChFoYJk3LPba8IODEA5FGUj2YGZcSB5PROsGSp0V5_8srILTMTyK49zsD3nzOqNNGTAVl8wCTUS4TzDXBrF8JvDlEskyQJry51E6pEMOO63FQQsfu_XuN089VOck_KfnQBFDaSZL_NrnKm613zhZDFgd-UGdLIaQLe384bXoshasg0rVQf_wj9lUpbdsBlZ8SGD4IIkVRcxncc7VcXMbwwxeVE5_wd_c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">브라이어</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">48.5%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:07</span>
+</div>
+</div>
+</div>
+<!-- Card: Jarvan IV -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="자르반 4세" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCai5oU4kaP-IuHWgzXs-Ct4yUe3LP2uggnbd6pzA6Q-WoT7-2Z-rkgNOTlE_-NCLVnmDJozI0QLJozH-K7cWC1YeY6nkVStML60coUisAgql1gDYAjS_luxKI3BJ0j8fPGaKafhD7_J95UsJAtDFm05ZnTSFp8jmTVmo7srzuDxX4CDsyVrOaSoQfGWNn1z81u30wOUoaqyedO3WBhiPf1KgGkpqIN_R30NTCcH54tHmAKteMSDxJGSlHqKsQsyKi5r_Snwi35o5A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">자르반 4세</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">50.8%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:10</span>
+</div>
+</div>
+</div>
+<!-- Card: Sejuani -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="세주아니" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJh0e5_Uk7JO7VgmyeZ8_oI4RVcBZmddapVck0FIwd84uqKpoxBl1RNakE_lvOzA5koHpow1IZm0BQoY0sg41rI9wAF_W07tH7VgZNho2kbIDLP-4JTVqzFl8atBFh4-zRilMkyAZFg1G3dWnWjn7bDkaGG0DaRogqcWMzC7l70RbqNE86ZiMJ91jwNwUKiUShkIq-r80sSeytsCIfqSt3lJz22XGaWrJBdhCfmKmT00V88nisqDhbSNZcwHas32T0II_n3iPNQyo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">세주아니</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">49.4%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:18</span>
+</div>
+</div>
+</div>
+<!-- Card: Elise -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="엘리스" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVrJiL4gQHRBObxVdehWyzaLHi-ewKjCosQ6Z7VNbY1BjcJhSpXpVFEH7V5PZaIAcQyTv01aRem6XRDzP989-aP8gqLJMj-jrxiFrJoEGid0ppGdFqA2esCdgaTsLSVCx7DgfZBnJ5Y51Zl-Hfw0qVj_GTGwvxFSqx_VCL-rFDH3KNGVxvLPd0NHn1XH-Jd_oSYWkiGGoe9zrNZWZTm7-DKVATO4SoR6gy1z_wQFkrrZpYRGRi3xGrNJ4suv0N0Dsh-Vv4hsVe1qo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">엘리스</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">51.7%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:15</span>
+</div>
+</div>
+</div>
+<!-- Card: Rek'Sai -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="렉사이" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC6bFP4VROBNT5JASdRhagzed1yQlxpHTd7mFnus3NbXgr1_asDaHiE_aFBxnGHkwN-thfHt15ZEDweKvPsNEnkAOczVEWXDv1j7cMzPm-bekt0BT__D90dxNNxMfJHvxcPrB-SyXIamFIFRTIOHTeSJzDeh9_2lorekCBvBOgBx07HS_5wvzS569ew6pH0fQ8XYpqpa_S3eQ6zu4f2_feBs2gLJEq5EgpbA6tXcbMHaQtnpQA0TmZezK_A_GWZT6BZ-toUvNRQdQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">렉사이</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">50.5%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:11</span>
+</div>
+</div>
+</div>
+<!-- Card: Maokai -->
+<div class="group relative bg-surface-container rounded-lg overflow-hidden hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-lg border border-white/5">
+<div class="aspect-[16/11] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100" data-alt="마오카이" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK43lHDM5O1TXpiCeyqFKmA3dYfShseNNzLci7LAB7VnQkZpCI4CLlAEn6Qv4NzhcGi6XT_JEx35xmIMsKwyd-QiTg14UXycy05lXn2W7prArmas26OChpiNyoHlLn19mgRrIzx-3jbIXSonAZGQTAZddiLZrlSGCPOJJt7qgErLD8hxdUtEsa44GjVS-lv74CvH5DG9wHuesgSQve7LCsgsJzG-21vGXlnZkyeqiwZvahGJ-ApOTVs_8cpQN6Rh3WAn1_-xMqjpk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-lg">play_circle</span>
+</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h3 class="font-headline text-base md:text-lg font-bold text-on-surface">마오카이</h3>
+<span class="text-[10px] md:text-xs font-bold text-primary/80">
+<span class="flex items-center gap-2">
+<span class="text-[8px] md:text-[9px] font-label text-on-surface-variant/50 uppercase tracking-tighter">Win Rate</span>
+<span class="text-[11px] md:text-xs font-bold text-primary">52.1%</span>
+</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">Best Full Camp</span>
+<span class="text-xs md:text-sm font-mono text-primary font-semibold">03:02</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0E17] w-full py-12 border-t border-white/5">
+<div class="flex flex-col items-center gap-6 max-w-7xl mx-auto px-6">
+<div class="text-[#68FC8D] font-black text-xl font-headline tracking-tight uppercase italic">JungleClear.gg</div>
+<div class="flex gap-8">
+<a class="font-['Manrope'] text-xs uppercase tracking-widest text-white/40 hover:text-[#68FC8D] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Manrope'] text-xs uppercase tracking-widest text-white/40 hover:text-[#68FC8D] transition-colors" href="#">Terms of Service</a>
+<a class="font-['Manrope'] text-xs uppercase tracking-widest text-white/40 hover:text-[#68FC8D] transition-colors" href="#">API Docs</a>
+<a class="font-['Manrope'] text-xs uppercase tracking-widest text-white/40 hover:text-[#68FC8D] transition-colors" href="#">Contact</a>
+</div>
+<p class="font-['Manrope'] text-xs uppercase tracking-widest text-white/40 text-center opacity-60">
+                © 2024 JungleClear.gg. Tactical Pulse Design System.
+            </p>
+</div>
+</footer>
+</body></html>
