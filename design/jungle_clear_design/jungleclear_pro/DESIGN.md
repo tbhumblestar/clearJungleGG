@@ -39,7 +39,7 @@ Depth is not communicated through physical distance (shadows) alone, but through
 *   **Tonal Borders:** If a separator is required, use `white/5` (5% white) to create a subtle "ghost border" that suggests structure without adding visual noise.
 
 ### 5. Components
-*   **Buttons:** Primary actions use the `Jungle Gradient` (#10B981 to #0CBC56). They are sharp-edged (4px radius) and scale down on click (95%).
+*   **Buttons:** Primary actions use the `Jungle Gradient` (#10B981 to #0DA573). They are sharp-edged (4px radius) and scale down on click (95%).
 *   **Tactical Search:** A full-width autocomplete layer. The input should be oversized (text-lg) with a 20px blur background.
 *   **Data Cards:** Cards must feature a high-density layout. Use Monospace font for numerical data (Win Rates, Timers) to ensure alignment and technical feel.
 *   **Status Badges:** Small (10px), uppercase, italic. They should look like stamped military designations.
