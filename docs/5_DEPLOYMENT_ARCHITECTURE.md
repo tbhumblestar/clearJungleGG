@@ -18,7 +18,8 @@
 ### A. 프론트엔드 (Vercel)
 * **역할:** Next.js 애플리케이션 호스팅, SSR/SSG 렌더링, Edge Network를 통한 정적 자원(HTML, JS, CSS) 배포.
 * **배포 방식 (CI/CD):**
-  * GitHub 레포지토리의 `main` 브랜치에 Push/Merge 발생 시 Vercel에서 자동으로 빌드 및 무중단 배포 수행.
+  * 모노레포(`clearJungleGG`) 구조. Vercel의 **Root Directory를 `frontend`로 설정**.
+  * `main` 브랜치에 Push/Merge 발생 시 Vercel에서 자동으로 빌드 및 무중단 배포 수행.
   * PR(Pull Request) 생성 시 Preview URL 자동 생성.
 * **네트워크 전략:** 외부 에셋(라이엇 이미지, 유튜브 영상)에 대한 트래픽을 프론트엔드 서버가 부담하지 않으므로, Vercel의 무료 티어(Hobby) 대역폭 한도 내에서 대규모 사용자 수용 가능.
 
@@ -30,7 +31,7 @@
   1. 주기적(예: 매시간)으로 Riot Match-V5 API 호출.
   2. 타임라인 이벤트를 분석하여 '3분 15초 풀캠프' 데이터 추출 및 검증.
   3. 검증된 최단 기록을 Supabase(DB)에 Insert/Update.
-* **배포 방식:** GitHub Actions를 활용한 Docker 이미지 빌드 및 서버 배포 자동화.
+* **배포 방식:** 같은 모노레포에서 GitHub Actions를 활용. `backend/` 경로 변경 시에만 빌드 트리거.
 
 ### C. 데이터베이스 (Supabase)
 * **역할:** 챔피언 메타데이터, 유저 기록, 리더보드 등 영구 데이터 저장.
