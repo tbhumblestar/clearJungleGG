@@ -4,8 +4,9 @@
 초기 운영 비용 최소화(Zero-Cost)와 트래픽 분산 처리에 최적화된 하이브리드 클라우드 아키텍처를 채택합니다.
 
 * **Frontend:** Next.js (App Router) → **Vercel (Hobby/Free Tier)**
-* **Backend / Batch:** Spring Boot (Java) → **AWS EC2 (Free Tier, t2.micro)**
+* **Backend / Batch:** Spring WebFlux (Kotlin) → **AWS EC2 (Free Tier, t2.micro)**
   * 배치 스케줄러(Riot API 데이터 수집)도 동일 서버에서 Spring Scheduler로 구동
+  * Kotlin Coroutines + WebClient로 넌블로킹 대량 API 호출
 * **Database:** PostgreSQL → **Supabase (Free Tier)**
 * **Media Hosting:**
   * 이미지: Riot Data Dragon CDN

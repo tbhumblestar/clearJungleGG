@@ -9,11 +9,25 @@
   * `design/color_v2/DESIGN.md` — 디자인 원칙
 
 ## 2. 기술 스택 (Tech Stack)
+
+### Frontend
 * **프레임워크:** Next.js 16 (App Router) + TypeScript
 * **스타일링:** Tailwind CSS v4 (CSS-first config, `globals.css`의 `@theme inline` 블록에서 토큰 정의)
 * **상태 관리:** React Hooks (`useState`, `useEffect` 등 기본 훅 위주로 경량화)
 * **아이콘/폰트:** Material Symbols Outlined, Space Grotesk(헤드라인), Manrope(본문), JetBrains Mono(숫자/데이터)
-* **배포:** Vercel (Hobby/Free Tier) — `5_DEPLOYMENT_ARCHITECTURE.md` 참고
+* **배포:** Vercel (Hobby/Free Tier)
+
+### Backend
+* **언어:** Kotlin
+* **프레임워크:** Spring WebFlux (Netty)
+* **비동기:** Kotlin Coroutines + WebClient
+* **ORM:** Spring Data JPA (Hibernate)
+* **DB:** PostgreSQL (Supabase Free Tier)
+* **배포:** AWS EC2 (Free Tier, t2.micro)
+* **구현 규칙:** `4_BACKEND_IMPLEMENTATION.md` 참고
+
+### 인프라
+* 상세 구성은 `5_DEPLOYMENT_ARCHITECTURE.md` 참고
 
 ## 3. 문서 구조
 
