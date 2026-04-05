@@ -68,7 +68,13 @@
 > `.env` 파일은 `.gitignore`에 포함되어 Git에 커밋되지 않습니다.
 
 ## 5. AI 협업 및 코딩 규칙 (Rule of Engagement)
+
+### Frontend
 1. **디자인 시스템을 따를 것:** 새 컴포넌트를 만들 때 `frontend/DESIGN_SYSTEM.md`의 토큰, 패턴, 유틸리티 클래스를 우선 사용할 것. 기존에 없는 스타일이 필요하면 디자인 시스템에 추가한 후 사용할 것.
 2. **Primary 색상:** `#10B981` (primary), `#0DA573` (primary-container). 그라디언트: `jungle-gradient` 클래스 사용.
 3. **컴포넌트 주도 개발 (CDD):** 큰 페이지를 한 번에 짜지 말고, `components/` 폴더 내에 재사용 가능한 단위로 잘게 쪼개서 작업할 것.
 4. **더미 데이터(Mock Data) 활용:** 백엔드 API가 아직 연결되지 않았으므로, `src/data/mock.ts`의 기존 데이터 구조를 참고하여 확장할 것.
+
+### Backend
+1. **API Spec 기반 TDD:** `2_API_SPEC.md`에 API를 먼저 정의하고 → 해당 스펙에 맞는 테스트 코드를 작성한 뒤 → 테스트를 통과시키는 방식으로 API를 구현한다.
+2. **하이브리드 I/O 규칙 준수:** `4_BACKEND_IMPLEMENTATION.md`에 정의된 `Dispatchers.IO` 격리, `@Transactional` 동기 함수, 단방향 호출 규칙을 반드시 따를 것.
