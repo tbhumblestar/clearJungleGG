@@ -41,3 +41,7 @@ next-env.d.ts
 
 # IDE
 .idea/
+
+# dev guide (접속 정보 포함)
+DEV_GUIDE.md
+
