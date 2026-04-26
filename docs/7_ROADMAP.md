@@ -1,6 +1,6 @@
 # 7_ROADMAP.md (JungleClear.gg 로드맵)
 
-## 현재 단계: Phase 1 (진행 중)
+## 현재 단계: Phase 2 완료, Phase 3 진입 대기
 
 ---
 
@@ -24,11 +24,34 @@
 
 **핵심 결과물:**
 - 매치 데이터 수집 파이프라인 (League API → Match-V5 API → Timeline API)
-- 정글 매치 원천 데이터 구축 (`match_record` — SSOT)
+- 정글 매치 원천 데이터 구축 (`jungle_match_record` — SSOT)
 - 챔피언별 통계 산출 (승률, 픽률, 밴률)
 - 챔피언 간 상성 데이터 구축 (정글 매치업 승률)
 - 경기별 룬/소환사 주문 수집
-- 순수성 검증 기반 풀캠프 클리어 기록 추출 (`clear_record`) -> 녹화 후보군으로 사용
+- 순수성 검증 기반 풀캠프 클리어 기록 추출 (`pure_fullcamp_clear_record`) -> 녹화 후보군으로 사용
+
+**세부 진행 상황:**
+- ✅ Spring Boot 초기 세팅 (Kotlin/WebFlux/JPA, Supabase 연동)
+- ✅ DB 스키마 SQL 작성 (6개 테이블)
+- ✅ Riot API 클라이언트 (WebClient + Rate Limiter + 429 Retry)
+- ✅ Step 0: 챔피언 동기화 (Data Dragon → champion 테이블)
+- ✅ Step 1: 유저 풀 수집 (챌린저 + 그랜드마스터 ~1,000명)
+- ✅ Step 2: 매치 ID 수집 (puuid별 매치 목록, DB 중복 제거)
+- ✅ Step 3: 매치 상세 처리 (정글러 추출 → jungle_match_record 저장)
+- ✅ Step 4: 타임라인 분석 (시작 위치, 순수성 검증 → pure_fullcamp_clear_record 저장)
+- ✅ Step 5: 통계 집계 (champion_stats, champion_matchup, champion_clear_stats 갱신)
+- ✅ 수동 트리거 엔드포인트 (`POST /api/v1/pipeline/run?date=`)
+- ✅ 스케줄러 (매일 01시 KST 자동 실행)
+- ✅ 단위 테스트 + 통합 테스트 (MockWebServer + H2)
+- ✅ 실데이터 파이프라인 검증 완료 (2026-04-25)
+
+**실데이터 검증 결과 (2026-04-25, 패치 16.8):**
+- 유저 풀: 1,000명 (챌린저 300 + 그마 700)
+- 수집 매치: 869경기 (리메이크 6건 스킵)
+- 매치 기록: 1,726건 (jungle_match_record)
+- 클리어 기록: 654건 (pure_fullcamp_clear_record)
+- 챔피언 통계: 161건, 상성: 814건, 클리어 통계: 330건
+- 총 소요: ~62분, 에러 0건
 
 ---
 

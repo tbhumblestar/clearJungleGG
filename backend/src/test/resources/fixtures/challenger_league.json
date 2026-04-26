@@ -1,0 +1,10 @@
+{
+  "tier": "CHALLENGER",
+  "leagueId": "7eab3e85-test",
+  "queue": "RANKED_SOLO_5x5",
+  "entries": [
+    { "puuid": "puuid-challenger-1", "leaguePoints": 2462 },
+    { "puuid": "puuid-challenger-2", "leaguePoints": 2100 },
+    { "puuid": "puuid-challenger-3", "leaguePoints": 1800 }
+  ]
+}

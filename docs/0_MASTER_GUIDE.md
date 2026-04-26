@@ -37,6 +37,9 @@
 3. **ROADMAP(`7_ROADMAP.md`)은 프로젝트의 큰 방향을 정의한다.** 각 Phase의 목표와 핵심 결과물을 서술한다. 로드맵을 진행하면서 보류한 기능은 `10_BACKLOG.md`에 쌓는다.
 4. **새 기능 추가 시 순서:** ROADMAP에서 현재 Phase 확인 → PRD에 유저 경험 정의 → 프론트엔드 구현서에 화면 구현 방법 추가 → 코드 작성.
 
+### 문서 참조 방식
+문서 목록은 **Lazy Loading** 방식으로 참조한다. 세션 시작 시 전체 문서를 읽지 않고, 작업에 필요한 문서만 그때그때 읽는다. 각 문서의 "언제 참고하는가" 컬럼을 기준으로 판단할 것.
+
 ### 문서 목록
 
 #### 기획 문서
@@ -59,13 +62,22 @@
 | `9_DATA_STRATEGY.md` | 데이터 전략서 (수집, 정제, 저장 기준) | 백엔드 데이터 로직 구현, 새로운 데이터 수집 항목 추가 시 |
 | `frontend/DESIGN_SYSTEM.md` | 디자인 시스템 및 컴포넌트 셋 | UI 수정, 새 컴포넌트 구현 시. Stitch 등 외부 AI 도구에게도 이 문서를 제공할 것 |
 
-## 4. 환경 변수 (`.env`)
+## 4. 환경 변수
 
+### Frontend (`.env.local`)
 | 변수명 | 설명 | 비고 |
 |--------|------|------|
-| `RIOT_API_KEY` | Riot Games API 키 | 데이터 수집 배치에서 사용 |
+| (현재 없음) | — | Mock 데이터 사용 중 |
 
-> `.env` 파일은 `.gitignore`에 포함되어 Git에 커밋되지 않습니다.
+### Backend (`backend/backend.env`)
+| 변수명 | 설명 | 비고 |
+|--------|------|------|
+| `RIOT_API_KEY` | Riot Games API 키 | 데이터 수집 파이프라인에서 사용 |
+| `DB_URL` | PostgreSQL JDBC URL | Supabase 연결 |
+| `DB_USERNAME` | DB 사용자명 | Supabase 프로젝트별 고유값 |
+| `DB_PASSWORD` | DB 비밀번호 | |
+
+> 환경 변수 파일은 `.gitignore`에 포함되어 Git에 커밋되지 않습니다.
 
 ## 5. AI 협업 및 코딩 규칙 (Rule of Engagement)
 

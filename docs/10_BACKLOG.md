@@ -101,7 +101,7 @@
 ---
 
 ## ~~[BACKLOG-008] 선별 영상에 룬/소환사 주문 정보 제공~~ → Phase 2 핵심으로 승격
-> Phase 2에서 `match_record`에 룬/소환사 주문을 경기별로 수집한다. `9_DATA_STRATEGY.md` DS-2, DS-3 참고.
+> Phase 2에서 `jungle_match_record`에 룬/소환사 주문을 경기별로 수집한다. `9_DATA_STRATEGY.md` DS-2, DS-3 참고.
 
 ---
 
@@ -110,7 +110,7 @@
 * **설명:** Timeline API(API-H)의 `SKILL_LEVEL_UP` 이벤트에서 스킬 레벨업 순서를 추출할 수 있다. 챔피언별 인기 스킬 오더를 제공하면 유저에게 유용한 정보가 된다.
 * **데이터 소스:** `SKILL_LEVEL_UP` 이벤트 — `participantId`, `skillSlot`(1~4), `levelUpType`
 * **필요 작업:**
-  1. `match_record`에 `skill_order` 컬럼 추가 (JSON 배열)
+  1. `jungle_match_record`에 `skill_order` 컬럼 추가 (JSON 배열)
   2. 챔피언별 인기 스킬 오더 집계 로직 구현
   3. API 스펙 및 프론트엔드 UI 설계
 
@@ -121,7 +121,7 @@
 * **설명:** Timeline API(API-H)의 `ITEM_PURCHASED` 이벤트에서 아이템 구매 순서를 추출할 수 있다. 챔피언별 인기 빌드 경로를 제공하면 유저에게 유용한 정보가 된다.
 * **데이터 소스:** `ITEM_PURCHASED` 이벤트 — `participantId`, `itemId`, `timestamp`
 * **필요 작업:**
-  1. `match_record`에 `item_build` 컬럼 추가 (JSON 배열)
+  1. `jungle_match_record`에 `item_build` 컬럼 추가 (JSON 배열)
   2. 챔피언별 인기 빌드 경로 집계 로직 구현
   3. Item 메타데이터 캐싱 (Data Dragon `item.json`)
   4. API 스펙 및 프론트엔드 UI 설계

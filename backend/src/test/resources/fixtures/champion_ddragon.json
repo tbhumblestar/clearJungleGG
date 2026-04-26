@@ -1,0 +1,11 @@
+{
+  "type": "champion",
+  "version": "16.6.1",
+  "data": {
+    "LeeSin": { "id": "LeeSin", "key": "64", "name": "리 신", "title": "눈먼 수도승" },
+    "Graves": { "id": "Graves", "key": "104", "name": "그레이브즈", "title": "무법자" },
+    "Nidalee": { "id": "Nidalee", "key": "76", "name": "니달리", "title": "야성의 사냥꾼" },
+    "Hecarim": { "id": "Hecarim", "key": "120", "name": "헤카림", "title": "전쟁의 전령" },
+    "Viego": { "id": "Viego", "key": "234", "name": "비에고", "title": "몰락한 왕" }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "matchId": "KR_7001",
+    "participants": ["puuid-1", "puuid-2", "puuid-3", "puuid-4", "puuid-5", "puuid-6", "puuid-7", "puuid-8", "puuid-9", "puuid-10"]
+  },
+  "info": {
+    "gameVersion": "16.6.756.9613",
+    "gameDuration": 1800,
+    "gameStartTimestamp": 1714000000000,
+    "participants": [
+      {
+        "puuid": "puuid-1",
+        "riotIdGameName": "Hide on bush",
+        "riotIdTagline": "KR1",
+        "championName": "LeeSin",
+        "teamId": 100,
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "perks": {
+          "statPerks": { "defense": 5002, "flex": 5008, "offense": 5005 },
+          "styles": [
+            {
+              "description": "primaryStyle",
+              "style": 8000,
+              "selections": [
+                { "perk": 8010 }, { "perk": 9111 }, { "perk": 9104 }, { "perk": 8299 }
+              ]
+            },
+            {
+              "description": "subStyle",
+              "style": 8400,
+              "selections": [
+                { "perk": 8444 }, { "perk": 8451 }
+              ]
+            }
+          ]
+        },
+        "summoner1Id": 11,
+        "summoner2Id": 4
+      },
+      {
+        "puuid": "puuid-2",
+        "riotIdGameName": "Canyon",
+        "riotIdTagline": "KR1",
+        "championName": "Graves",
+        "teamId": 200,
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "perks": {
+          "statPerks": { "defense": 5002, "flex": 5008, "offense": 5005 },
+          "styles": [
+            {
+              "description": "primaryStyle",
+              "style": 8100,
+              "selections": [
+                { "perk": 8112 }, { "perk": 8126 }, { "perk": 8138 }, { "perk": 8135 }
+              ]
+            },
+            {
+              "description": "subStyle",
+              "style": 8300,
+              "selections": [
+                { "perk": 8304 }, { "perk": 8347 }
+              ]
+            }
+          ]
+        },
+        "summoner1Id": 4,
+        "summoner2Id": 11
+      },
+      {
+        "puuid": "puuid-3",
+        "riotIdGameName": "TopLaner",
+        "riotIdTagline": "KR1",
+        "championName": "Aatrox",
+        "teamId": 100,
+        "teamPosition": "TOP",
+        "win": true,
+        "perks": null,
+        "summoner1Id": 4,
+        "summoner2Id": 12
+      },
+      {
+        "puuid": "puuid-6",
+        "riotIdGameName": "MidLaner",
+        "riotIdTagline": "KR1",
+        "championName": "Ahri",
+        "teamId": 200,
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "perks": null,
+        "summoner1Id": 4,
+        "summoner2Id": 14
+      }
+    ],
+    "teams": [
+      {
+        "teamId": 100,
+        "bans": [
+          { "championId": 234, "pickTurn": 1 },
+          { "championId": 64, "pickTurn": 2 },
+          { "championId": -1, "pickTurn": 3 },
+          { "championId": 104, "pickTurn": 4 },
+          { "championId": 76, "pickTurn": 5 }
+        ]
+      },
+      {
+        "teamId": 200,
+        "bans": [
+          { "championId": 120, "pickTurn": 6 },
+          { "championId": 421, "pickTurn": 7 },
+          { "championId": 28, "pickTurn": 8 },
+          { "championId": 79, "pickTurn": 9 },
+          { "championId": 203, "pickTurn": 10 }
+        ]
+      }
+    ]
+  }
+}

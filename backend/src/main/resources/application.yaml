@@ -14,5 +14,11 @@ spring:
       hibernate:
         default_schema: public
 
+riot:
+  api-key: ${RIOT_API_KEY}
+  kr-base-url: https://kr.api.riotgames.com
+  asia-base-url: https://asia.api.riotgames.com
+  ddragon-base-url: https://ddragon.leagueoflegends.com
+
 server:
   port: 8080

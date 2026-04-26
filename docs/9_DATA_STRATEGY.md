@@ -11,10 +11,10 @@
 
 | 데이터 | 설명 | 저장 위치 |
 |--------|------|-----------|
-| 정글 매치 원천 기록 | 모든 정글러의 경기별 기록 (SSOT) | `match_record` |
+| 정글 매치 원천 기록 | 모든 정글러의 경기별 기록 (SSOT) | `jungle_match_record` |
 | 챔피언 통계 | 승률, 픽률, 밴률 | `champion_stats` |
 | 챔피언 상성 | 정글 챔피언 간 1:1 승률 (카운터 밴 추천용) | `champion_matchup` |
-| 풀캠프 클리어 기록 | 순수성 검증 통과한 클리어 타임 (영상 녹화 후보) | `clear_record` |
+| 풀캠프 클리어 기록 | 순수성 검증 통과한 클리어 타임 (영상 녹화 후보) | `pure_fullcamp_clear_record` |
 
 ### 1-2. 수집 대상
 * **서버:** 한국(KR)
@@ -36,16 +36,16 @@
 
 2. 매치 ID 수집
    API-F (by puuid, queue=420, 전날 범위) → match_id 목록
-   ※ 중복 제거: match_record에 이미 있는 match_id는 건너뜀
+   ※ 중복 제거: jungle_match_record에 이미 있는 match_id는 건너뜀
 
 3. 매치 상세 처리 → [DS-3]
-   API-G (매치 상세) → 정글러 추출, 메타데이터 파싱 → match_record 저장
+   API-G (매치 상세) → 정글러 추출, 메타데이터 파싱 → jungle_match_record 저장
 
 4. 타임라인 분석 → [DS-4]
-   API-H (타임라인) → 시작 위치, 순수성 검증, 클리어 타임 → clear_record 저장
+   API-H (타임라인) → 시작 위치, 순수성 검증, 클리어 타임 → pure_fullcamp_clear_record 저장
 
 5. 통계 집계 → [DS-5]
-   match_record 기반 → champion_stats, champion_matchup 갱신
+   jungle_match_record 기반 → champion_stats, champion_matchup 갱신
 ```
 
 ---
@@ -56,12 +56,13 @@
 
 ```mermaid
 erDiagram
-    champion ||--o{ match_record : "champion_id"
-    champion ||--o{ match_record : "opponent_champion_id"
+    champion ||--o{ jungle_match_record : "champion_id"
+    champion ||--o{ jungle_match_record : "opponent_champion_id"
     champion ||--o{ champion_stats : "champion_id"
     champion ||--o{ champion_matchup : "champion_id"
     champion ||--o{ champion_matchup : "opponent_champion_id"
-    match_record ||--o| clear_record : "match_record_id"
+    champion ||--o{ champion_clear_stats : "champion_id"
+    jungle_match_record ||--o| pure_fullcamp_clear_record : "jungle_match_record_id"
 
     champion {
         VARCHAR id PK "영문 ID (LeeSin)"
@@ -72,7 +73,7 @@ erDiagram
         JSONB champion_history "변경 이력"
     }
 
-    match_record {
+    jungle_match_record {
         BIGSERIAL id PK "Auto increment"
         VARCHAR match_id UK "Riot 매치 ID"
         VARCHAR champion_id FK "플레이 챔피언"
@@ -107,11 +108,21 @@ erDiagram
         INT losses "패배 횟수"
     }
 
-    clear_record {
+    pure_fullcamp_clear_record {
         BIGSERIAL id PK "Auto increment"
-        BIGINT match_record_id FK_UK "원천 매치 기록 (1:1)"
+        BIGINT jungle_match_record_id FK_UK "원천 매치 기록 (1:1)"
         INT clear_time_ms "4레벨 달성 시간 (ms)"
         VARCHAR youtube_video_id "영상 ID (nullable)"
+    }
+
+    champion_clear_stats {
+        VARCHAR champion_id PK_FK "챔피언 ID"
+        VARCHAR patch_version PK "패치 버전"
+        VARCHAR team PK "BLUE / RED"
+        VARCHAR start_position PK "시작 캠프"
+        INT avg_clear_time_ms "평균 클리어 시간"
+        INT best_clear_time_ms "최고 클리어 시간"
+        INT sample_count "샘플 수"
     }
 ```
 
@@ -144,7 +155,7 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 * 패치 동기화 시 기존 값과 비교하여 변경점이 있으면 `champion_history` 배열에 추가
 * 변경이 없으면 `patch_version`과 `updated_at`만 갱신
 
-### 2-2. match_record (원천 데이터 — SSOT)
+### 2-2. jungle_match_record (원천 데이터 — SSOT)
 
 모든 정글 매치 기록의 단일 진실 공급원. 매치당 정글러 2명 → **2행** 저장.
 
@@ -174,7 +185,7 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 
 ### 2-3. champion_stats (파생 — 통계 집계)
 
-`match_record` 기반으로 배치에서 집계. 챔피언별·패치별 통계.
+`jungle_match_record` 기반으로 배치에서 집계. 챔피언별·패치별 통계.
 
 | 컬럼 | 타입 | 설명 |
 |------|------|------|
@@ -206,21 +217,38 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 
 **예시:** 리신 vs 그레이브즈 = wins: 45, losses: 55 → 리신 입장 승률 45%
 
-### 2-5. clear_record (파생 — 가치있는 경기)
+### 2-5. pure_fullcamp_clear_record (파생 — 가치있는 경기)
 
 순수성 검증(DS-4)을 통과한 풀캠프 클리어 기록. 영상 녹화 후보이자 리더보드 데이터.
 
 | 컬럼 | 타입 | 설명 |
 |------|------|------|
 | `id` | BIGINT (PK) | Auto increment |
-| `match_record_id` | BIGINT (FK) | match_record 참조 |
+| `jungle_match_record_id` | BIGINT (FK) | jungle_match_record 참조 |
 | `clear_time_ms` | INT | 4레벨 달성 시간 (밀리초, 게임 내 시간) |
 | `youtube_video_id` | VARCHAR | YouTube 영상 ID (Phase 3에서 채움, nullable) |
 | `created_at` | TIMESTAMP | 레코드 생성 시각 |
 
 **조회 패턴:**
-* 챔피언별 리더보드: `JOIN match_record WHERE champion_id = ? ORDER BY clear_time_ms LIMIT 10`
+* 챔피언별 리더보드: `JOIN jungle_match_record WHERE champion_id = ? ORDER BY clear_time_ms LIMIT 10`
 * 챔피언별 최고 기록: `MIN(clear_time_ms) WHERE champion_id = ?`
+
+### 2-6. champion_clear_stats (파생 — 클리어 속도 통계)
+
+`pure_fullcamp_clear_record` + `jungle_match_record` 기반으로 배치에서 집계. 챔피언·패치·팀·시작위치별 클리어 속도 통계.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| `champion_id` | VARCHAR (PK) | 챔피언 ID |
+| `patch_version` | VARCHAR (PK) | 패치 버전 |
+| `team` | VARCHAR (PK) | BLUE / RED |
+| `start_position` | VARCHAR (PK) | 시작 캠프 (BLUE_BUFF, RED_BUFF 등) |
+| `avg_clear_time_ms` | INT | 평균 클리어 시간 (밀리초) |
+| `best_clear_time_ms` | INT | 최고(최단) 클리어 시간 (밀리초) |
+| `sample_count` | INT | 샘플 수 (순수 풀캠프 클리어 기록 기반) |
+| `start_count` | INT | 이 시작위치로 시작한 전체 경기 수 |
+| `total_games` | INT | 해당 챔피언/패치/팀의 전체 경기 수. 시작 비율 = start_count / total_games |
+| `updated_at` | TIMESTAMP | 마지막 집계 시각 |
 
 ---
 
@@ -228,11 +256,11 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 
 ### 3-1. 정글러 추출
 * `info.participants[]`에서 `teamPosition === "JUNGLE"`인 참가자 2명 추출
-* 각 정글러에 대해 `match_record` 1행씩 생성
+* 각 정글러에 대해 `jungle_match_record` 1행씩 생성
 
 ### 3-2. 수집 필드 매핑
 
-| match_record 컬럼 | API-G 필드 |
+| jungle_match_record 컬럼 | API-G 필드 |
 |-------------------|-----------|
 | `match_id` | `metadata.matchId` |
 | `champion_id` | `participants[].championName` |
@@ -259,12 +287,28 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 ## [DS-4] 타임라인 분석 (API-H)
 
 ### 4-1. 시작 위치 판별
-* 게임 시간 **1분 시점**의 유저 좌표(`position`)를 확인하여 시작 캠프(레드/블루/칼날부리)를 기록한다.
+* 게임 시간 **1분 시점**의 유저 좌표(`position`)를 확인하여 시작 캠프를 기록한다.
 * `frames[1].participantFrames[participantId].position`에서 좌표 추출
-* 판별 결과를 `match_record.start_position`에 업데이트
+* 판별 결과를 `jungle_match_record.start_position`에 업데이트
+* 값: `BLUE_BUFF`, `RED_BUFF`, `RAPTORS`, `WOLVES`, `KRUGS`, `GROMP`
+
+**판별 방식:** 1분 시점 좌표와 각 캠프 좌표 간 유클리드 거리(dx² + dy²)를 계산하여 가장 가까운 캠프를 매칭한다. 구현: `TimelineAnalyzer.classifyCamp()`
+
+**캠프 좌표 (맵 좌표계 기준):**
+
+| 캠프 | 블루팀 (x, y) | 레드팀 (x, y) |
+|------|--------------|--------------|
+| BLUE_BUFF | 3821, 7901 | 10931, 7071 |
+| RED_BUFF | 7462, 3934 | 7462, 10834 |
+| RAPTORS | 6974, 5426 | 7852, 9382 |
+| WOLVES | 3782, 6443 | 11008, 8420 |
+| KRUGS | 8350, 2834 | 6476, 12006 |
+| GROMP | 2175, 8348 | 12603, 6438 |
+
+> ⚠️ 이 좌표는 커뮤니티 자료 기반 추정값이며, Riot 공식 제공 데이터가 아니다. 패치에 따라 미세하게 변경될 수 있으므로, 실데이터 적재 후 `start_position` 결과의 합리성을 검증할 필요가 있다.
 
 ### 4-2. 순수성 검증 (Purity Check)
-4레벨 달성 전까지 외부 변수(챔피언 간 교전, 라인 미니언 등)가 개입했는지 검증한다. **하나라도 걸리면 clear_record에 저장하지 않는다.** 놓치는 데이터는 있어도, 오염된 데이터가 통과해서는 안 된다.
+4레벨 달성 전까지 외부 변수(챔피언 간 교전, 라인 미니언 등)가 개입했는지 검증한다. **하나라도 걸리면 pure_fullcamp_clear_record에 저장하지 않는다.** 놓치는 데이터는 있어도, 오염된 데이터가 통과해서는 안 된다.
 
 | # | 검증 조건 | 데이터 소스 | 판별 기준 |
 |---|----------|-----------|----------|
@@ -279,7 +323,7 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 ### 4-3. 4레벨 달성 시간 추출
 * 타임라인의 `LEVEL_UP` 이벤트에서 4레벨 도달 시점의 **게임 내 실제 시간(timestamp)**을 그대로 추출한다.
 * 예: 게임 시계 기준 3:05에 달성 → `clear_time_ms = 185000`
-* 순수성 검증 통과 시 `clear_record`에 저장
+* 순수성 검증 통과 시 `pure_fullcamp_clear_record`에 저장
 
 ### 4-4. 자연 도태 (Natural Filter-out)
 아래 엣지 케이스는 별도 예외 처리 없이, "최고 기록만 의미 있다"는 비즈니스 특성으로 자연 필터링된다.
@@ -295,23 +339,23 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 
 ### 5-1. champion_stats 집계
 
-배치 완료 후 `match_record` 기반으로 `champion_stats`를 갱신한다.
+배치 완료 후 `jungle_match_record` 기반으로 `champion_stats`를 갱신한다.
 
 ```
 픽 수 (pick_count):
-  SELECT champion_id, COUNT(*) FROM match_record
+  SELECT champion_id, COUNT(*) FROM jungle_match_record
   WHERE patch_version = ? GROUP BY champion_id
 
 승리 수 (win_count):
-  SELECT champion_id, COUNT(*) FROM match_record
+  SELECT champion_id, COUNT(*) FROM jungle_match_record
   WHERE patch_version = ? AND win = true GROUP BY champion_id
 
 밴 수 (ban_count):
-  match_record.banned_champions JSONB 배열을 풀어서 챔피언별 등장 횟수 집계
+  jungle_match_record.banned_champions JSONB 배열을 풀어서 챔피언별 등장 횟수 집계
   ※ 같은 매치의 2행에 동일 밴 목록이 있으므로, match_id 기준 중복 제거 필요
 
 전체 매치 수 (total_matches):
-  SELECT COUNT(DISTINCT match_id) FROM match_record WHERE patch_version = ?
+  SELECT COUNT(DISTINCT match_id) FROM jungle_match_record WHERE patch_version = ?
 ```
 
 ### 5-2. champion_matchup 집계
@@ -320,12 +364,27 @@ Data Dragon에서 패치당 1회 동기화. 챔피언 기본 정보 + 변경 이
 SELECT champion_id, opponent_champion_id,
        SUM(CASE WHEN win THEN 1 ELSE 0 END) AS wins,
        SUM(CASE WHEN NOT win THEN 1 ELSE 0 END) AS losses
-FROM match_record
+FROM jungle_match_record
 WHERE patch_version = ?
 GROUP BY champion_id, opponent_champion_id
 ```
 
-* 양방향 자동 생성: 리신 vs 그레이브즈 행과 그레이브즈 vs 리신 행이 각각 존재 (match_record가 매치당 2행이므로)
+* 양방향 자동 생성: 리신 vs 그레이브즈 행과 그레이브즈 vs 리신 행이 각각 존재 (jungle_match_record가 매치당 2행이므로)
+
+### 5-3. champion_clear_stats 집계
+
+`pure_fullcamp_clear_record` JOIN `jungle_match_record` 기반으로 클리어 속도 통계를 집계한다.
+
+```
+집계 단위: champion_id + patch_version + team + start_position
+
+avg_clear_time_ms:  해당 그룹의 평균 클리어 시간
+best_clear_time_ms: 해당 그룹의 최고(최단) 클리어 시간
+sample_count:       해당 그룹의 레코드 수
+```
+
+* `start_position`이 NULL인 레코드는 집계에서 제외 (타임라인 분석 실패 케이스)
+* 구현: `StatsAggregator.aggregateChampionClearStats()`
 
 ---
 
@@ -343,7 +402,7 @@ GROUP BY champion_id, opponent_champion_id
 
 ### 6-2. 룬/소환사 주문 메타데이터
 * 패치당 1회 조회 후 **인메모리 캐싱** (DB 저장 불필요)
-* 숫자 ID → 한글 이름 매핑용 (match_record의 runes/summoner_spells 해석)
+* 숫자 ID → 한글 이름 매핑용 (jungle_match_record의 runes/summoner_spells 해석)
 
 ### 6-3. 이미지 URL
 * URL 패턴만 코드에서 조립. 실제 이미지는 Riot CDN에서 직접 서빙. 백엔드가 프록시할 필요 없음.

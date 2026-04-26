@@ -109,6 +109,68 @@ API Spec이 곧 계약(Contract)이다. 프론트엔드는 이 스펙을 믿고 
 
 ---
 
-## 4. 구현 Phase
+## 4. 패키지 구조
 
-*(Phase 2 백엔드 구현 시 모듈별 상세 작성 예정)*
+```
+backend/src/main/kotlin/backend/
+├── BackendApplication.kt
+├── config/
+│   ├── RiotApiProperties.kt          # @ConfigurationProperties(prefix = "riot")
+│   └── WebClientConfig.kt            # WebClient Bean 3개 (KR, ASIA, DDragon)
+├── controller/
+│   └── PipelineController.kt         # POST /api/v1/pipeline/run (수동 트리거)
+├── domain/
+│   ├── champion/
+│   │   ├── Champion.kt               # @Entity — champion 테이블
+│   │   └── ChampionRepository.kt
+│   ├── match/
+│   │   ├── JungleMatchRecord.kt      # @Entity — jungle_match_record 테이블
+│   │   ├── JungleMatchRecordRepository.kt
+│   │   ├── PureFullcampClearRecord.kt # @Entity — pure_fullcamp_clear_record 테이블
+│   │   └── PureFullcampClearRecordRepository.kt
+│   └── stats/
+│       ├── ChampionStats.kt          # @Entity — @IdClass 복합 PK
+│       ├── ChampionStatsRepository.kt
+│       ├── ChampionMatchup.kt
+│       ├── ChampionMatchupRepository.kt
+│       ├── ChampionClearStats.kt
+│       └── ChampionClearStatsRepository.kt
+├── jpa/
+│   ├── ChampionJpaService.kt         # @Transactional 동기 서비스
+│   ├── JungleMatchRecordJpaService.kt
+│   ├── PureFullcampClearRecordJpaService.kt
+│   └── StatsJpaService.kt
+├── pipeline/
+│   ├── MatchCollectionPipeline.kt    # Step 0~5 오케스트레이션
+│   ├── ChampionSyncService.kt       # Step 0: DDragon → champion
+│   ├── UserPoolCollector.kt          # Step 1: 챌린저+그마 puuid 수집
+│   ├── MatchIdCollector.kt           # Step 2: 매치 ID 수집 + DB 중복 제거
+│   ├── MatchDetailProcessor.kt      # Step 3: 매치 상세 → jungle_match_record
+│   ├── TimelineAnalyzer.kt          # Step 4: 타임라인 → 시작위치 + 순수 클리어
+│   └── StatsAggregator.kt           # Step 5: 통계 집계
+├── riot/
+│   ├── RiotApiClient.kt             # suspend 함수 7개 + 429 retry
+│   ├── RiotRateLimiter.kt           # Mutex + 1.3초 간격
+│   └── dto/
+│       ├── ChampionDataDragonDto.kt
+│       ├── LeagueListDto.kt
+│       ├── MatchDetailDto.kt
+│       └── MatchTimelineDto.kt
+└── scheduler/
+    └── MatchCollectionScheduler.kt   # @Scheduled cron 매일 01시 KST
+```
+
+## 5. 파이프라인 실행 흐름
+
+```
+Step 0: 챔피언 동기화    — DDragon API → champion 테이블 UPSERT
+Step 1: 유저 풀 수집     — League API (챌린저+그마) → puuid ~1,000명 (인메모리)
+Step 2: 매치 ID 수집     — Match-V5 by puuid → 유니크 matchId Set (DB 중복 제거)
+Step 3: 매치 상세 처리    — Match-V5 Detail → 정글러 2명 추출 → jungle_match_record
+Step 4: 타임라인 분석     — Timeline API → 시작 위치 + 순수성 검증 → pure_fullcamp_clear_record
+Step 5: 통계 집계        — DB 기반 집계 → champion_stats, champion_matchup, champion_clear_stats
+```
+
+실행 방법:
+- **자동:** 매일 01시 KST (`MatchCollectionScheduler`)
+- **수동:** `POST /api/v1/pipeline/run?date=2026-04-25&limit=10` (limit은 유저 풀 제한, 선택)

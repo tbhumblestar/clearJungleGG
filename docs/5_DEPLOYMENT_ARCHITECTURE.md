@@ -29,9 +29,9 @@
 * **인스턴스:** t2.micro (1 vCPU, 1GB RAM) — Free Tier 12개월 무료.
 * **배치 스케줄러:** Spring Scheduler(@Scheduled)로 동일 서버에서 주기적 실행.
 * **핵심 로직 (Riot Data Pipeline):**
-  1. 주기적(예: 매시간)으로 Riot Match-V5 API 호출.
-  2. 타임라인 이벤트를 분석하여 '3분 15초 풀캠프' 데이터 추출 및 검증.
-  3. 검증된 최단 기록을 Supabase(DB)에 Insert/Update.
+  1. 매일 01시 KST에 전날 매치 데이터 수집 (Spring Scheduler).
+  2. 천상계 유저 풀(~1,000명) → 매치 ID → 매치 상세 → 타임라인 분석 순차 처리.
+  3. 순수성 검증 통과한 풀캠프 클리어 기록 + 챔피언 통계/상성 데이터를 Supabase(DB)에 저장.
 * **배포 방식:** 같은 모노레포에서 GitHub Actions를 활용. `backend/` 경로 변경 시에만 빌드 트리거.
 
 ### C. 데이터베이스 (Supabase)

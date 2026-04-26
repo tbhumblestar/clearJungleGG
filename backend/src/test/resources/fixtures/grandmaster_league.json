@@ -1,0 +1,9 @@
+{
+  "tier": "GRANDMASTER",
+  "leagueId": "8fab4f96-test",
+  "queue": "RANKED_SOLO_5x5",
+  "entries": [
+    { "puuid": "puuid-grandmaster-1", "leaguePoints": 800 },
+    { "puuid": "puuid-grandmaster-2", "leaguePoints": 650 }
+  ]
+}
