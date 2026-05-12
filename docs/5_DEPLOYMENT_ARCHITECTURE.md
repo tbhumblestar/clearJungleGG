@@ -29,6 +29,7 @@
 ### B. 백엔드 및 배치 파이프라인 (AWS EC2 Free Tier) — 인프라 ✅ / 앱 배포 ⬜
 * **역할:** 프론트엔드 API 요청 처리(`GET /api/v1/champions` 등) 및 Riot API 데이터 수집 배치 작업.
 * **인스턴스:** t2.micro (1 vCPU, 1GB RAM), Ubuntu AMI — Free Tier 12개월 무료.
+* **Elastic IP:** 할당 완료 (고정 퍼블릭 IP). 접속 정보는 `DEV_GUIDE.md` 참고.
 * **접속:** `DEV_GUIDE.md` 참고 (접속 정보는 gitignore 대상 파일에서 관리)
 * **배치 스케줄러:** Spring Scheduler(@Scheduled)로 동일 서버에서 주기적 실행.
 * **핵심 로직 (Riot Data Pipeline):**
